@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ice="http://www.icesoft.com/icefaces/component"
+      xmlns:cc="http://java.sun.com/jsf/composite">
+
+    <cc:interface>
+        <cc:attribute name="cpf" required="true"/>
+        <cc:attribute name="tipoMascara" default="padrao"/>
+    </cc:interface>
+
+    <cc:implementation xmlns="http://www.w3.org/1999/xhtml"
+                       xmlns:f="http://java.sun.com/jsf/core"
+                       xmlns:ice="http://www.icesoft.com/icefaces/component"
+                       xmlns:ace="http://www.icefaces.org/icefaces/components"
+                       xmlns:cc="http://java.sun.com/jsf/composite">
+               
+        <ice:outputLabel for="cpf" value="CPF"/>
+        
+        <ace:maskedEntry id="cpfPadrao" value="#{cc.attrs.cpf}" rendered="#{cc.attrs.tipoMascara == 'padrao'}" mask="99999999999">
+            <f:validator validatorId="CPFValidator"/>
+            <!--<f:converter converterId="CPFConverter"/>-->
+        </ace:maskedEntry>
+
+        <ace:maskedEntry id="cpfSimples" value="#{cc.attrs.cpf}" rendered="#{cc.attrs.tipoMascara == 'simples'}" mask="999999999-99">
+            <f:validator validatorId="CPFValidator"/>
+            <!--<f:converter converterId="CPFConverter"/>-->
+        </ace:maskedEntry>
+        
+        <ace:maskedEntry id="cpfCompleta" value="#{cc.attrs.cpf}" rendered="#{cc.attrs.tipoMascara == 'completa'}" mask="999.999.999-99">
+            <f:validator validatorId="CPFValidator"/>
+            <!--<f:converter converterId="CPFConverter"/>-->
+        </ace:maskedEntry>
+        
+    </cc:implementation>
+</html>
